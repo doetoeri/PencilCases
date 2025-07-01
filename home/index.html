@@ -8,7 +8,6 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Symbols+Outlined" rel="stylesheet">
     <style>
         :root {
-            /* Material You Colors - No Gradients */
             --md-sys-color-primary: #6750A4;
             --md-sys-color-on-primary: #FFFFFF;
             --md-sys-color-primary-container: #EADDFF;
@@ -33,7 +32,6 @@
             --md-sys-color-error: #BA1A1A;
             --md-sys-color-on-error: #FFFFFF;
             --md-sys-color-error-container: #FFDAD6;
-            /* Shape */
             --md-sys-shape-corner-small: 8px;
             --md-sys-shape-corner-medium: 12px;
             --md-sys-shape-corner-large: 16px;
@@ -60,7 +58,6 @@
             margin: 0 auto;
             padding: 0 24px;
         }
-        /* Header */
         .header {
             background-color: var(--md-sys-color-primary);
             color: var(--md-sys-color-on-primary);
@@ -92,7 +89,7 @@
             padding: 6px 16px;
             border-radius: var(--md-sys-shape-corner-small);
             font-size: 0.9rem;
-            font-weight: 500;
+            font-weight: 5;
             display: inline-block;
             margin-bottom: 16px;
         }
@@ -107,7 +104,7 @@
             padding: 16px 24px;
             background-color: var(--md-sys-color-primary-container);
             color: var(--md-sys-color-on-primary-container);
-            border-radius: var(--md-sys-shake-corner-medium);
+            border-radius: var(--md-sys-shape-corner-medium);
         }
         .stat-number {
             font-size: 2rem;
@@ -118,7 +115,6 @@
             font-size: 0.9rem;
             opacity: 0.8;
         }
-        /* Main Content */
         .main-content {
             padding: 48px 0;
         }
@@ -203,10 +199,6 @@
             background-color: var(--md-sys-color-success-container);
             color: var(--md-sys-color-success);
         }
-        .status-beta {
-            background-color: var(--md-sys-color-secondary-container);
-            color: var(--md-sys-color-on-secondary-container);
-        }
         .project-description {
             font-size: 1rem;
             line-height: 1.6;
@@ -218,7 +210,7 @@
             gap: 8px;
             flex-wrap: wrap;
             margin-bottom: 16px;
-}
+        }
         .tag {
             background-color: var(--md-sys-color-surface-variant);
             color: var(--md-sys-color-on-surface-variant);
@@ -253,7 +245,6 @@
             color: var(--md-sys-color-on-surface-variant);
             opacity: 0.7;
         }
-        /* Footer */
         .footer {
             background-color: var(--md-sys-color-surface-variant);
             color: var(--md-sys-color-on-surface-variant);
@@ -279,7 +270,6 @@
         .footer-link:hover {
             color: var(--md-sys-color-primary);
         }
-        /* Auth Styles */
         .auth-container {
             max-width: 400px;
             margin: 24px auto;
@@ -394,7 +384,13 @@
             margin-bottom: 8px;
             display: block;
         }
-        /* Responsive Design */
+        .auth-message {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 16px;
+            color: var(--md-sys-color-success);
+        }
         @media (max-width: 768px) {
             .main-title {
                 font-size: 2rem;
@@ -415,7 +411,6 @@
     </style>
 </head>
 <body>
-    <!-- Header -->
     <header class="header">
         <div class="container">
             <h1 class="main-title">
@@ -440,7 +435,6 @@
         </div>
     </header>
 
-    <!-- Auth Container -->
     <div class="auth-container" id="authContainer">
         <div class="auth-tabs">
             <button class="tab active" data-tab="login">로그인</button>
@@ -457,7 +451,7 @@
             <input type="password" id="registerPasswordConfirm" placeholder="비밀번호 확인" required>
             <button type="submit">계정 요청</button>
         </form>
-        <div class="auth-message" id="registerMessage" style="margin-top: 16px; display: none;">
+        <div class="auth-message" id="registerMessage" style="display: none;">
             <span class="material-symbols-outlined">info</span>
             <span>계정 요청이 완료되었습니다. 승인 후 로그인할 수 있습니다.</span>
         </div>
@@ -471,12 +465,10 @@
         <button id="logoutButton">로그아웃</button>
     </div>
 
-    <!-- Main Content -->
     <main class="main-content">
         <div class="container">
             <h2 class="section-title">학생을 위한 서비스</h2>
             <div class="projects-grid">
-                <!-- Blinder Project Card -->
                 <div class="project-card" data-service="blinder">
                     <div class="project-header">
                         <div class="project-icon">
@@ -506,7 +498,6 @@
                         <span class="last-updated">2025.07.01</span>
                     </div>
                 </div>
-                <!-- Chain Project Card -->
                 <div class="project-card" data-service="chain">
                     <div class="project-header">
                         <div class="project-icon">
@@ -536,7 +527,6 @@
                         <span class="last-updated">2025.07.01</span>
                     </div>
                 </div>
-                <!-- Binote Project Card -->
                 <div class="project-card" data-service="binote">
                     <div class="project-header">
                         <div class="project-icon">
@@ -551,7 +541,7 @@
                         </div>
                     </div>
                     <p class="project-description">
-                        정리노트 서비스 - 학습 내용을 체계적으로 정리하고, 중요한 내용을 깔끔하게 기록할 수 있습니다.  
+                        정리노트 서비스 - 학습 내용을 체계적으로 정리하고, 중요한 내용을 깔끔하게 기록할 수 있습니다.<br>
                         Senior 등급만 이용 가능합니다.
                     </p>
                     <div class="project-tags">
@@ -571,7 +561,6 @@
         </div>
     </main>
 
-    <!-- Footer -->
     <footer class="footer">
         <div class="container">
             <div class="footer-content">
@@ -586,17 +575,13 @@
         // 사용자 데이터 구조
         class AuthManager {
             constructor() {
-                // 승인된 사용자
                 this.approvedUsers = JSON.parse(localStorage.getItem('pencilcases_approved_users') || '[]');
-                // 회원가입 요청 (관리자가 승인해야 함)
                 this.pendingUsers = JSON.parse(localStorage.getItem('pencilcases_pending_users') || '[]');
-                // 현재 로그인한 사용자
                 this.currentUser = JSON.parse(localStorage.getItem('pencilcases_currentUser') || 'null');
             }
 
             // 회원가입 요청
             requestRegister(username, password) {
-                // 중복 확인 (요청 중복도 체크)
                 if (this.pendingUsers.some(u => u.username === username) || 
                     this.approvedUsers.some(u => u.username === username)) {
                     throw new Error('이미 사용 중이거나 요청 중인 닉네임입니다.');
