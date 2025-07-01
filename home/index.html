@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PencilCases - 개발 도구 모음</title>
+    <title>PencilCases - 학생을 위한 학습 도구 모음</title>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Symbols+Outlined" rel="stylesheet">
     <style>
@@ -13,46 +13,37 @@
             --md-sys-color-on-primary: #FFFFFF;
             --md-sys-color-primary-container: #EADDFF;
             --md-sys-color-on-primary-container: #21005D;
-            
             --md-sys-color-secondary: #625B71;
             --md-sys-color-on-secondary: #FFFFFF;
             --md-sys-color-secondary-container: #E8DEF8;
             --md-sys-color-on-secondary-container: #1D192B;
-            
             --md-sys-color-tertiary: #7D5260;
             --md-sys-color-on-tertiary: #FFFFFF;
             --md-sys-color-tertiary-container: #FFD8E4;
             --md-sys-color-on-tertiary-container: #31111D;
-            
             --md-sys-color-surface: #FEF7FF;
             --md-sys-color-on-surface: #1D1B20;
             --md-sys-color-surface-variant: #E7E0EC;
             --md-sys-color-on-surface-variant: #49454F;
-            
             --md-sys-color-outline: #79747E;
             --md-sys-color-outline-variant: #CAC4D0;
-            
             --md-sys-color-success: #2E7D32;
             --md-sys-color-on-success: #FFFFFF;
             --md-sys-color-success-container: #C8E6C9;
-            
             --md-sys-color-error: #BA1A1A;
             --md-sys-color-on-error: #FFFFFF;
             --md-sys-color-error-container: #FFDAD6;
-            
             /* Shape */
             --md-sys-shape-corner-small: 8px;
             --md-sys-shape-corner-medium: 12px;
             --md-sys-shape-corner-large: 16px;
             --md-sys-shape-corner-extra-large: 24px;
         }
-
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
-
         body {
             font-family: 'Noto Sans KR', sans-serif;
             background-color: var(--md-sys-color-surface);
@@ -60,22 +51,15 @@
             line-height: 1.6;
             min-height: 100vh;
         }
-
         .material-symbols-outlined {
-            font-variation-settings:
-            'FILL' 0,
-            'wght' 400,
-            'GRAD' 0,
-            'opsz' 24;
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
             user-select: none;
         }
-
         .container {
             max-width: 1200px;
             margin: 0 auto;
             padding: 0 24px;
         }
-
         /* Header */
         .header {
             background-color: var(--md-sys-color-primary);
@@ -83,77 +67,61 @@
             padding: 40px 0;
             text-align: center;
             position: relative;
-            overflow: hidden;
         }
-
-        .header::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="20" cy="20" r="2" fill="rgba(255,255,255,0.1)"/><circle cx="80" cy="40" r="1.5" fill="rgba(255,255,255,0.05)"/><circle cx="40" cy="80" r="1" fill="rgba(255,255,255,0.08)"/><circle cx="70" cy="10" r="1.2" fill="rgba(255,255,255,0.06)"/><circle cx="10" cy="60" r="0.8" fill="rgba(255,255,255,0.04)"/></svg>') repeat;
-            pointer-events: none;
-        }
-
-        .header-content {
-            position: relative;
-            z-index: 1;
-        }
-
         .main-title {
             font-size: 3rem;
             font-weight: 700;
-            margin-bottom: 16px;
+            margin-bottom: 8px;
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 16px;
         }
-
         .main-title .material-symbols-outlined {
             font-size: 3rem;
         }
-
         .subtitle {
             font-size: 1.2rem;
             font-weight: 400;
             opacity: 0.9;
-            margin-bottom: 24px;
+            margin-bottom: 12px;
         }
-
+        .student-badge {
+            background-color: var(--md-sys-color-success-container);
+            color: var(--md-sys-color-success);
+            padding: 6px 16px;
+            border-radius: var(--md-sys-shape-corner-small);
+            font-size: 0.9rem;
+            font-weight: 500;
+            display: inline-block;
+            margin-bottom: 16px;
+        }
         .stats-container {
             display: flex;
             justify-content: center;
             gap: 32px;
             flex-wrap: wrap;
         }
-
         .stat-item {
             text-align: center;
             padding: 16px 24px;
-            background-color: rgba(255, 255, 255, 0.1);
+            background-color: var(--md-sys-color-primary-container);
+            color: var(--md-sys-color-on-primary-container);
             border-radius: var(--md-sys-shape-corner-medium);
-            backdrop-filter: blur(10px);
         }
-
         .stat-number {
             font-size: 2rem;
             font-weight: 700;
             display: block;
         }
-
         .stat-label {
             font-size: 0.9rem;
             opacity: 0.8;
         }
-
         /* Main Content */
         .main-content {
             padding: 48px 0;
         }
-
         .section-title {
             font-size: 2rem;
             font-weight: 600;
@@ -161,14 +129,12 @@
             text-align: center;
             color: var(--md-sys-color-on-surface);
         }
-
         .projects-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 24px;
             margin-bottom: 48px;
         }
-
         .project-card {
             background-color: var(--md-sys-color-surface);
             border: 1px solid var(--md-sys-color-outline-variant);
@@ -179,13 +145,11 @@
             position: relative;
             overflow: hidden;
         }
-
         .project-card:hover {
             border-color: var(--md-sys-color-primary);
             box-shadow: 0 4px 16px rgba(103, 80, 164, 0.12);
             transform: translateY(-2px);
         }
-
         .project-card::before {
             content: '';
             position: absolute;
@@ -197,18 +161,15 @@
             transform: scaleX(0);
             transition: transform 0.3s ease;
         }
-
         .project-card:hover::before {
             transform: scaleX(1);
         }
-
         .project-header {
             display: flex;
             align-items: center;
             gap: 16px;
             margin-bottom: 16px;
         }
-
         .project-icon {
             width: 48px;
             height: 48px;
@@ -220,52 +181,44 @@
             justify-content: center;
             font-size: 24px;
         }
-
         .project-info h3 {
             font-size: 1.5rem;
             font-weight: 600;
             margin-bottom: 4px;
             color: var(--md-sys-color-on-surface);
         }
-
         .project-status {
             display: flex;
             align-items: center;
             gap: 6px;
             font-size: 0.85rem;
         }
-
         .status-badge {
             padding: 4px 8px;
             border-radius: var(--md-sys-shape-corner-small);
             font-size: 0.75rem;
             font-weight: 500;
         }
-
         .status-active {
             background-color: var(--md-sys-color-success-container);
             color: var(--md-sys-color-success);
         }
-
         .status-beta {
             background-color: var(--md-sys-color-secondary-container);
             color: var(--md-sys-color-on-secondary-container);
         }
-
         .project-description {
             font-size: 1rem;
             line-height: 1.6;
             color: var(--md-sys-color-on-surface-variant);
             margin-bottom: 16px;
         }
-
         .project-tags {
             display: flex;
             gap: 8px;
             flex-wrap: wrap;
             margin-bottom: 16px;
         }
-
         .tag {
             background-color: var(--md-sys-color-surface-variant);
             color: var(--md-sys-color-on-surface-variant);
@@ -274,14 +227,12 @@
             font-size: 0.8rem;
             font-weight: 500;
         }
-
         .project-footer {
             display: flex;
             justify-content: space-between;
             align-items: center;
             margin-top: auto;
         }
-
         .project-link {
             display: flex;
             align-items: center;
@@ -291,21 +242,17 @@
             font-weight: 500;
             transition: color 0.2s ease;
         }
-
         .project-link:hover {
             color: var(--md-sys-color-on-primary-container);
         }
-
         .project-link .material-symbols-outlined {
             font-size: 18px;
         }
-
         .last-updated {
             font-size: 0.8rem;
             color: var(--md-sys-color-on-surface-variant);
             opacity: 0.7;
         }
-
         /* Footer */
         .footer {
             background-color: var(--md-sys-color-surface-variant);
@@ -314,7 +261,6 @@
             text-align: center;
             margin-top: 48px;
         }
-
         .footer-content {
             display: flex;
             justify-content: center;
@@ -322,7 +268,6 @@
             gap: 16px;
             flex-wrap: wrap;
         }
-
         .footer-link {
             color: var(--md-sys-color-on-surface-variant);
             text-decoration: none;
@@ -331,29 +276,138 @@
             gap: 6px;
             transition: color 0.2s ease;
         }
-
         .footer-link:hover {
             color: var(--md-sys-color-primary);
         }
-
+        /* Auth Styles */
+        .auth-container {
+            max-width: 400px;
+            margin: 24px auto;
+            background-color: var(--md-sys-color-surface);
+            border: 1px solid var(--md-sys-color-outline-variant);
+            border-radius: var(--md-sys-shape-corner-large);
+            padding: 24px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+        .auth-tabs {
+            display: flex;
+            margin-bottom: 16px;
+            border-bottom: 1px solid var(--md-sys-color-outline-variant);
+        }
+        .tab {
+            flex: 1;
+            padding: 12px;
+            background: none;
+            border: none;
+            font-family: 'Noto Sans KR', sans-serif;
+            font-weight: 500;
+            cursor: pointer;
+            color: var(--md-sys-color-on-surface-variant);
+            transition: all 0.2s ease;
+        }
+        .tab.active {
+            color: var(--md-sys-color-primary);
+            border-bottom: 2px solid var(--md-sys-color-primary);
+        }
+        .auth-form {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+        .auth-form input, .auth-form select {
+            padding: 12px;
+            border: 1px solid var(--md-sys-color-outline-variant);
+            border-radius: var(--md-sys-shape-corner-medium);
+            font-family: 'Noto Sans KR', sans-serif;
+            font-size: 16px;
+        }
+        .auth-form button {
+            background-color: var(--md-sys-color-primary);
+            color: var(--md-sys-color-on-primary);
+            border: none;
+            border-radius: var(--md-sys-shape-corner-medium);
+            padding: 12px;
+            font-family: 'Noto Sans KR', sans-serif;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        .auth-form button:hover {
+            background-color: var(--md-sys-color-on-primary-container);
+            color: var(--md-sys-color-primary);
+        }
+        .hidden {
+            display: none;
+        }
+        .user-status {
+            max-width: 400px;
+            margin: 24px auto;
+            background-color: var(--md-sys-color-surface);
+            border: 1px solid var(--md-sys-color-outline-variant);
+            border-radius: var(--md-sys-shape-corner-large);
+            padding: 16px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            justify-content: space-between;
+        }
+        .user-status #logoutButton {
+            background: none;
+            border: 1px solid var(--md-sys-color-outline);
+            color: var(--md-sys-color-on-surface);
+            border-radius: var(--md-sys-shape-corner-medium);
+            padding: 8px 16px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        .user-status #logoutButton:hover {
+            background-color: var(--md-sys-color-error-container);
+            color: var(--md-sys-color-error);
+        }
+        .grade-badge {
+            background-color: var(--md-sys-color-tertiary-container);
+            color: var(--md-sys-color-on-tertiary-container);
+            padding: 4px 12px;
+            border-radius: var(--md-sys-shape-corner-small);
+            font-size: 0.85rem;
+            font-weight: 500;
+            display: inline-block;
+        }
+        .lock-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.7);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: var(--md-sys-shape-corner-large);
+        }
+        .lock-content {
+            text-align: center;
+            color: white;
+        }
+        .lock-content .material-symbols-outlined {
+            font-size: 48px;
+            margin-bottom: 8px;
+            display: block;
+        }
         /* Responsive Design */
         @media (max-width: 768px) {
             .main-title {
                 font-size: 2rem;
             }
-
             .main-title .material-symbols-outlined {
                 font-size: 2rem;
             }
-
             .projects-grid {
                 grid-template-columns: 1fr;
             }
-
             .stats-container {
                 gap: 16px;
             }
-
             .container {
                 padding: 0 16px;
             }
@@ -364,38 +418,67 @@
     <!-- Header -->
     <header class="header">
         <div class="container">
-            <div class="header-content">
-                <h1 class="main-title">
-                    <span class="material-symbols-outlined">construction</span>
-                    PencilCases
-                </h1>
-                <p class="subtitle">개발자를 위한 유용한 도구들을 모아놓은 공간</p>
-                <div class="stats-container">
-                    <div class="stat-item">
-                        <span class="stat-number" id="projectCount">1</span>
-                        <span class="stat-label">프로젝트</span>
-                    </div>
-                    <div class="stat-item">
-                        <span class="stat-number" id="toolCount">1</span>
-                        <span class="stat-label">도구</span>
-                    </div>
-                    <div class="stat-item">
-                        <span class="stat-number" id="updateCount">2025</span>
-                        <span class="stat-label">최신 업데이트</span>
-                    </div>
+            <h1 class="main-title">
+                <span class="material-symbols-outlined">construction</span>
+                PencilCases
+            </h1>
+            <p class="subtitle">학생을 위한 학습 도구 모음</p>
+            <div class="student-badge">
+                <span class="material-symbols-outlined">school</span>
+                학생용 서비스
+            </div>
+            <div class="stats-container">
+                <div class="stat-item">
+                    <span class="stat-number" id="projectCount">2</span>
+                    <span class="stat-label">프로젝트</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number" id="toolCount">2</span>
+                    <span class="stat-label">도구</span>
                 </div>
             </div>
         </div>
     </header>
 
+    <!-- Auth Container -->
+    <div class="auth-container" id="authContainer">
+        <div class="auth-tabs">
+            <button class="tab active" data-tab="login">로그인</button>
+            <button class="tab" data-tab="register">회원가입</button>
+        </div>
+        <form class="auth-form" id="loginForm">
+            <input type="text" id="loginUsername" placeholder="닉네임" required>
+            <input type="password" id="loginPassword" placeholder="비밀번호" required>
+            <button type="submit">로그인</button>
+        </form>
+        <form class="auth-form hidden" id="registerForm">
+            <input type="text" id="registerUsername" placeholder="닉네임" required>
+            <input type="password" id="registerPassword" placeholder="비밀번호" required>
+            <input type="password" id="registerPasswordConfirm" placeholder="비밀번호 확인" required>
+            <select id="registerGrade" required>
+                <option value="junior">Junior</option>
+                <option value="sophomore">Sophomore</option>
+                <option value="senior">Senior</option>
+            </select>
+            <button type="submit">회원가입</button>
+        </form>
+    </div>
+    <div class="user-status hidden" id="userStatus">
+        <div style="display: flex; align-items: center; gap: 12px;">
+            <span class="material-symbols-outlined">account_circle</span>
+            <span id="usernameDisplay"></span>
+            <span class="grade-badge" id="gradeDisplay"></span>
+        </div>
+        <button id="logoutButton">로그아웃</button>
+    </div>
+
     <!-- Main Content -->
     <main class="main-content">
         <div class="container">
-            <h2 class="section-title">사용 가능한 프로젝트</h2>
-            
+            <h2 class="section-title">학생을 위한 서비스</h2>
             <div class="projects-grid">
                 <!-- Blinder Project Card -->
-                <div class="project-card" onclick="navigateToProject('../blinder/')">
+                <div class="project-card" data-service="blinder">
                     <div class="project-header">
                         <div class="project-icon">
                             <span class="material-symbols-outlined">school</span>
@@ -408,59 +491,50 @@
                             </div>
                         </div>
                     </div>
-                    
                     <p class="project-description">
-                        문장 외우기 도구 - 일반 모드와 테스트 모드를 제공하여 효과적인 언어 학습을 도와줍니다. 
-                        아코디언 방식의 인터페이스와 실시간 정확도 체크 기능을 지원합니다.
+                        문장 외우기 도구 - 일반 모드와 테스트 모드를 제공하여 효과적인 언어 학습을 도와줍니다.
                     </p>
-                    
                     <div class="project-tags">
                         <span class="tag">학습도구</span>
                         <span class="tag">언어학습</span>
                         <span class="tag">Material You</span>
-                        <span class="tag">반응형</span>
                     </div>
-                    
                     <div class="project-footer">
-                        <a href="../blinder/" class="project-link">
+                        <a href="../blinder/" class="project-link" id="blinderLink">
                             <span>시작하기</span>
                             <span class="material-symbols-outlined">arrow_forward</span>
                         </a>
                         <span class="last-updated">2025.07.01</span>
                     </div>
                 </div>
-
-                <!-- Placeholder for future projects -->
-                <div class="project-card" style="opacity: 0.6; cursor: not-allowed;">
+                <!-- Chain Project Card -->
+                <div class="project-card" data-service="chain">
                     <div class="project-header">
                         <div class="project-icon">
-                            <span class="material-symbols-outlined">construction</span>
+                            <span class="material-symbols-outlined">link</span>
                         </div>
                         <div class="project-info">
-                            <h3>새 프로젝트</h3>
+                            <h3>Chain</h3>
                             <div class="project-status">
-                                <span class="status-badge status-beta">준비중</span>
-                                <span class="material-symbols-outlined" style="font-size: 16px;">schedule</span>
+                                <span class="status-badge status-active">활성</span>
+                                <span class="material-symbols-outlined" style="font-size: 16px;">verified</span>
                             </div>
                         </div>
                     </div>
-                    
                     <p class="project-description">
-                        새로운 유용한 도구가 곧 추가될 예정입니다. 
-                        개발자들의 일상을 더욱 편리하게 만들어 줄 도구들을 준비 중입니다.
+                        연쇄 학습 도구 - 단어, 문장, 개념을 연결하여 자연스럽게 암기할 수 있도록 도와줍니다.
                     </p>
-                    
                     <div class="project-tags">
-                        <span class="tag">준비중</span>
-                        <span class="tag">개발도구</span>
+                        <span class="tag">학습도구</span>
+                        <span class="tag">암기법</span>
+                        <span class="tag">연결학습</span>
                     </div>
-                    
                     <div class="project-footer">
-                        <span class="project-link" style="color: var(--md-sys-color-on-surface-variant); cursor: not-allowed;">
-                            <span>준비중</span>
-                            <span class="material-symbols-outlined">hourglass_empty</span>
-                        </span>
-                        <span class="last-updated">곧 출시</span>
+                        <a href="../chain/" class="project-link" id="chainLink">
+                            <span>시작하기</span>
+                            <span class="material-symbols-outlined">arrow_forward</span>
+                        </a>
+                        <span class="last-updated">2025.07.01</span>
                     </div>
                 </div>
             </div>
@@ -471,49 +545,208 @@
     <footer class="footer">
         <div class="container">
             <div class="footer-content">
-                <a href="https://github.com" class="footer-link">
-                    <span class="material-symbols-outlined">code</span>
-                    <span>GitHub</span>
-                </a>
-                <span>•</span>
                 <span>© 2025 PencilCases</span>
                 <span>•</span>
-                <span>Made with Material You</span>
+                <span>학생을 위한 학습 도구</span>
             </div>
         </div>
     </footer>
 
     <script>
-        function navigateToProject(url) {
-            window.location.href = url;
+        // 사용자 데이터 구조
+        class AuthManager {
+            constructor() {
+                this.users = JSON.parse(localStorage.getItem('pencilcases_users') || '[]');
+                this.currentUser = JSON.parse(localStorage.getItem('pencilcases_currentUser') || 'null');
+            }
+
+            // 회원가입
+            register(username, password, grade) {
+                // 중복 확인
+                if (this.users.some(u => u.username === username)) {
+                    throw new Error('이미 사용 중인 닉네임입니다.');
+                }
+                const user = {
+                    id: Date.now().toString(),
+                    username,
+                    password: btoa(password), // 실제 서비스에서는 더 강력한 암호화 필요!
+                    grade,
+                    createdAt: new Date().toISOString()
+                };
+                this.users.push(user);
+                localStorage.setItem('pencilcases_users', JSON.stringify(this.users));
+                return user;
+            }
+
+            // 로그인
+            login(username, password) {
+                const user = this.users.find(u => u.username === username && u.password === btoa(password));
+                if (!user) {
+                    throw new Error('닉네임 또는 비밀번호가 잘못되었습니다.');
+                }
+                this.currentUser = user;
+                localStorage.setItem('pencilcases_currentUser', JSON.stringify(user));
+                return user;
+            }
+
+            // 로그아웃
+            logout() {
+                this.currentUser = null;
+                localStorage.removeItem('pencilcases_currentUser');
+            }
+
+            // 현재 사용자 확인
+            isLoggedIn() {
+                return this.currentUser !== null;
+            }
         }
 
-        // 동적 통계 업데이트
-        function updateStats() {
-            const projectCards = document.querySelectorAll('.project-card:not([style*="opacity"])');
-            const projectCount = projectCards.length;
-            
-            document.getElementById('projectCount').textContent = projectCount;
-            document.getElementById('toolCount').textContent = projectCount;
-            
-            // 현재 연도 표시
-            document.getElementById('updateCount').textContent = new Date().getFullYear();
+        // 등급별 접근 가능 서비스 정의
+        const gradeAccess = {
+            junior: ['blinder'],
+            sophomore: ['blinder', 'chain'],
+            senior: ['blinder', 'chain']
+        };
+
+        // 등급 이름 한글 표시
+        const gradeNames = {
+            junior: 'Junior',
+            sophomore: 'Sophomore',
+            senior: 'Senior'
+        };
+
+        // DOM 요소
+        const authContainer = document.getElementById('authContainer');
+        const loginForm = document.getElementById('loginForm');
+        const registerForm = document.getElementById('registerForm');
+        const userStatus = document.getElementById('userStatus');
+        const usernameDisplay = document.getElementById('usernameDisplay');
+        const gradeDisplay = document.getElementById('gradeDisplay');
+        const logoutButton = document.getElementById('logoutButton');
+        const tabs = document.querySelectorAll('.tab');
+        const projectCards = document.querySelectorAll('.project-card');
+        const blinderLink = document.getElementById('blinderLink');
+        const chainLink = document.getElementById('chainLink');
+
+        // 인증 매니저 생성
+        const auth = new AuthManager();
+
+        // 탭 전환
+        tabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                tabs.forEach(t => t.classList.remove('active'));
+                tab.classList.add('active');
+                loginForm.classList.toggle('hidden', tab.dataset.tab !== 'login');
+                registerForm.classList.toggle('hidden', tab.dataset.tab !== 'register');
+            });
+        });
+
+        // 로그인
+        loginForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const username = document.getElementById('loginUsername').value;
+            const password = document.getElementById('loginPassword').value;
+            try {
+                auth.login(username, password);
+                updateUI();
+            } catch (error) {
+                alert(error.message);
+            }
+        });
+
+        // 회원가입
+        registerForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const username = document.getElementById('registerUsername').value;
+            const password = document.getElementById('registerPassword').value;
+            const passwordConfirm = document.getElementById('registerPasswordConfirm').value;
+            const grade = document.getElementById('registerGrade').value;
+            if (password !== passwordConfirm) {
+                alert('비밀번호가 일치하지 않습니다.');
+                return;
+            }
+            try {
+                auth.register(username, password, grade);
+                alert('회원가입이 완료되었습니다. 로그인해 주세요!');
+                tabs[0].click(); // 로그인 탭으로 전환
+            } catch (error) {
+                alert(error.message);
+            }
+        });
+
+        // 로그아웃
+        logoutButton.addEventListener('click', () => {
+            auth.logout();
+            updateUI();
+        });
+
+        // 등급별 서비스 접근 제어
+        function updateServiceAccess(grade) {
+            const accessibleServices = gradeAccess[grade] || [];
+            projectCards.forEach(card => {
+                const serviceName = card.dataset.service;
+                const isAccessible = accessibleServices.includes(serviceName);
+                card.style.opacity = isAccessible ? '1' : '0.5';
+                card.style.pointerEvents = isAccessible ? 'all' : 'none';
+                // 잠금 오버레이 추가/제거 (기존 오버레이 삭제)
+                const existingLock = card.querySelector('.lock-overlay');
+                if (existingLock) existingLock.remove();
+                if (!isAccessible) {
+                    const lockOverlay = document.createElement('div');
+                    lockOverlay.className = 'lock-overlay';
+                    lockOverlay.innerHTML = `
+                        <div class="lock-content">
+                            <span class="material-symbols-outlined">lock</span>
+                            <p>${gradeNames[grade]} 등급에서는 이용할 수 없습니다<br>업그레이드가 필요합니다</p>
+                        </div>
+                    `;
+                    card.appendChild(lockOverlay);
+                }
+            });
+            // 링크 비활성화
+            blinderLink.style.pointerEvents = accessibleServices.includes('blinder') ? 'all' : 'none';
+            blinderLink.style.opacity = accessibleServices.includes('blinder') ? '1' : '0.5';
+            chainLink.style.pointerEvents = accessibleServices.includes('chain') ? 'all' : 'none';
+            chainLink.style.opacity = accessibleServices.includes('chain') ? '1' : '0.5';
         }
 
-        // 페이지 로드 시 통계 업데이트
-        document.addEventListener('DOMContentLoaded', updateStats);
-
-        // 로컬 스토리지에서 마지막 방문 기록
-        function recordVisit() {
-            const visitData = {
-                timestamp: new Date().toISOString(),
-                page: 'home'
-            };
-            localStorage.setItem('pencilcases_last_visit', JSON.stringify(visitData));
+        // UI 업데이트
+        function updateUI() {
+            if (auth.isLoggedIn()) {
+                authContainer.classList.add('hidden');
+                userStatus.classList.remove('hidden');
+                usernameDisplay.textContent = auth.currentUser.username;
+                gradeDisplay.textContent = gradeNames[auth.currentUser.grade] || '알 수 없음';
+                updateServiceAccess(auth.currentUser.grade);
+            } else {
+                authContainer.classList.remove('hidden');
+                userStatus.classList.add('hidden');
+                // 비로그인 시 모든 서비스 잠금
+                projectCards.forEach(card => {
+                    card.style.opacity = '0.5';
+                    card.style.pointerEvents = 'none';
+                    const existingLock = card.querySelector('.lock-overlay');
+                    if (!existingLock) {
+                        const lockOverlay = document.createElement('div');
+                        lockOverlay.className = 'lock-overlay';
+                        lockOverlay.innerHTML = `
+                            <div class="lock-content">
+                                <span class="material-symbols-outlined">lock</span>
+                                <p>로그인이 필요합니다</p>
+                            </div>
+                        `;
+                        card.appendChild(lockOverlay);
+                    }
+                });
+                blinderLink.style.pointerEvents = 'none';
+                blinderLink.style.opacity = '0.5';
+                chainLink.style.pointerEvents = 'none';
+                chainLink.style.opacity = '0.5';
+            }
         }
 
-        // 방문 기록 저장
-        document.addEventListener('DOMContentLoaded', recordVisit);
+        // 페이지 로드 시 UI 업데이트
+        document.addEventListener('DOMContentLoaded', updateUI);
     </script>
 </body>
 </html>
