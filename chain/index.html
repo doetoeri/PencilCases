@@ -1,0 +1,944 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chain - 영어 대화문 순서 배열</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <style>
+        :root {
+            --md-sys-color-primary: #6750A4;
+            --md-sys-color-on-primary: #FFFFFF;
+            --md-sys-color-primary-container: #EADDFF;
+            --md-sys-color-on-primary-container: #21005D;
+            
+            --md-sys-color-secondary: #625B71;
+            --md-sys-color-on-secondary: #FFFFFF;
+            --md-sys-color-secondary-container: #E8DEF8;
+            --md-sys-color-on-secondary-container: #1D192B;
+            
+            --md-sys-color-surface: #FEF7FF;
+            --md-sys-color-on-surface: #1D1B20;
+            --md-sys-color-surface-variant: #E7E0EC;
+            --md-sys-color-on-surface-variant: #49454F;
+            
+            --md-sys-color-outline: #79747E;
+            --md-sys-color-outline-variant: #CAC4D0;
+            
+            --md-sys-color-success: #2E7D32;
+            --md-sys-color-error: #BA1A1A;
+            --md-sys-color-warning: #F57C00;
+            
+            --md-sys-shape-corner-small: 8px;
+            --md-sys-shape-corner-medium: 12px;
+            --md-sys-shape-corner-large: 16px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+            background-color: var(--md-sys-color-surface);
+            color: var(--md-sys-color-on-surface);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        .app-layout {
+            display: grid;
+            grid-template-columns: 400px 1fr;
+            min-height: 100vh;
+        }
+
+        .sidebar {
+            background-color: var(--md-sys-color-primary-container);
+            color: var(--md-sys-color-on-primary-container);
+            padding: 24px;
+            border-right: 1px solid var(--md-sys-color-outline-variant);
+            overflow-y: auto;
+        }
+
+        .main-content {
+            padding: 24px;
+            overflow-y: auto;
+        }
+
+        .header {
+            background-color: var(--md-sys-color-primary);
+            color: var(--md-sys-color-on-primary);
+            text-align: center;
+            padding: 24px;
+            border-radius: var(--md-sys-shape-corner-large);
+            margin-bottom: 24px;
+        }
+
+        .header h1 {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .stats-section {
+            background-color: var(--md-sys-color-secondary-container);
+            color: var(--md-sys-color-on-secondary-container);
+            border-radius: var(--md-sys-shape-corner-large);
+            padding: 20px;
+            margin-bottom: 24px;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 12px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: var(--md-sys-shape-corner-medium);
+        }
+
+        .stat-number {
+            font-size: 1.5rem;
+            font-weight: 700;
+            display: block;
+        }
+
+        .stat-label {
+            font-size: 0.85rem;
+            opacity: 0.8;
+        }
+
+        .input-section {
+            margin-bottom: 24px;
+        }
+
+        .input-group {
+            margin-bottom: 16px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            font-size: 0.95rem;
+        }
+
+        textarea {
+            width: 100%;
+            padding: 12px 16px;
+            border: 1px solid var(--md-sys-color-outline-variant);
+            border-radius: var(--md-sys-shape-corner-medium);
+            font-size: 14px;
+            font-family: 'Noto Sans KR', sans-serif;
+            background-color: var(--md-sys-color-surface);
+            color: var(--md-sys-color-on-surface);
+            transition: border-color 0.2s ease;
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        textarea:focus {
+            outline: none;
+            border-color: var(--md-sys-color-primary);
+            box-shadow: 0 0 0 3px rgba(103, 80, 164, 0.12);
+        }
+
+        .button-group {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-bottom: 16px;
+        }
+
+        .md-button {
+            border: none;
+            border-radius: var(--md-sys-shape-corner-large);
+            padding: 10px 16px;
+            font-size: 13px;
+            font-weight: 500;
+            font-family: 'Noto Sans KR', sans-serif;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            justify-content: center;
+            flex: 1;
+            min-width: 80px;
+        }
+
+        .md-button.filled {
+            background-color: var(--md-sys-color-primary);
+            color: var(--md-sys-color-on-primary);
+        }
+
+        .md-button.success {
+            background-color: var(--md-sys-color-success);
+            color: white;
+        }
+
+        .md-button.error {
+            background-color: var(--md-sys-color-error);
+            color: white;
+        }
+
+        .md-button.outlined {
+            background-color: transparent;
+            color: var(--md-sys-color-primary);
+            border: 1px solid var(--md-sys-color-outline);
+        }
+
+        .md-button:hover {
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+            transform: translateY(-1px);
+        }
+
+        .md-button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        .saved-dialogues {
+            background-color: var(--md-sys-color-surface-variant);
+            border-radius: var(--md-sys-shape-corner-medium);
+            padding: 16px;
+            margin-bottom: 16px;
+        }
+
+        .saved-title {
+            font-weight: 500;
+            margin-bottom: 12px;
+            color: var(--md-sys-color-primary);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .saved-item {
+            background-color: var(--md-sys-color-surface);
+            border-radius: var(--md-sys-shape-corner-small);
+            padding: 8px 12px;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-size: 13px;
+        }
+
+        .saved-item-text {
+            flex: 1;
+            cursor: pointer;
+            transition: color 0.2s ease;
+        }
+
+        .saved-item-text:hover {
+            color: var(--md-sys-color-primary);
+        }
+
+        .saved-item-actions {
+            display: flex;
+            gap: 4px;
+        }
+
+        .action-btn {
+            background: none;
+            border: none;
+            padding: 4px;
+            cursor: pointer;
+            border-radius: var(--md-sys-shape-corner-small);
+            transition: background-color 0.2s ease;
+        }
+
+        .action-btn:hover {
+            background-color: rgba(0,0,0,0.1);
+        }
+
+        .chain-area {
+            background-color: var(--md-sys-color-surface-variant);
+            border-radius: var(--md-sys-shape-corner-large);
+            padding: 24px;
+            margin-bottom: 24px;
+            min-height: 500px;
+        }
+
+        .chain-title {
+            text-align: center;
+            margin-bottom: 24px;
+            font-size: 1.2rem;
+            font-weight: 500;
+            color: var(--md-sys-color-primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .block-count {
+            background-color: var(--md-sys-color-primary);
+            color: var(--md-sys-color-on-primary);
+            padding: 4px 12px;
+            border-radius: var(--md-sys-shape-corner-medium);
+            font-size: 0.9rem;
+            margin-left: 12px;
+        }
+
+        .dialogue-blocks {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-bottom: 24px;
+        }
+
+        .dialogue-block {
+            background-color: var(--md-sys-color-surface);
+            border: 2px solid var(--md-sys-color-outline-variant);
+            border-radius: var(--md-sys-shape-corner-medium);
+            padding: 16px;
+            cursor: move;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            user-select: none;
+            position: relative;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            touch-action: none;
+        }
+
+        .dialogue-block:hover {
+            border-color: var(--md-sys-color-primary);
+            box-shadow: 0 4px 12px rgba(103, 80, 164, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .dialogue-block.dragging {
+            opacity: 0.9;
+            transform: scale(1.05) rotate(2deg);
+            z-index: 10;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+        }
+
+        .dialogue-block.correct {
+            background-color: var(--md-sys-color-success);
+            color: white;
+            border-color: var(--md-sys-color-success);
+        }
+
+        .dialogue-block.incorrect {
+            background-color: var(--md-sys-color-error);
+            color: white;
+            border-color: var(--md-sys-color-error);
+        }
+
+        .block-number {
+            background-color: var(--md-sys-color-primary);
+            color: var(--md-sys-color-on-primary);
+            border-radius: 50%;
+            width: 28px;
+            height: 28px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 13px;
+            font-weight: 600;
+            flex-shrink: 0;
+        }
+
+        .block-text {
+            flex: 1;
+            font-size: 15px;
+            line-height: 1.4;
+            padding: 4px 0;
+        }
+
+        .drag-handle {
+            color: var(--md-sys-color-on-surface-variant);
+            cursor: move;
+            opacity: 0.7;
+        }
+
+        .control-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .result-section {
+            background-color: var(--md-sys-color-primary-container);
+            border-radius: var(--md-sys-shape-corner-large);
+            padding: 24px;
+            margin-bottom: 24px;
+            text-align: center;
+            display: none;
+        }
+
+        .result-section.show {
+            display: block;
+        }
+
+        .result-score {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .result-message {
+            font-size: 1.1rem;
+            margin-bottom: 20px;
+        }
+
+        .result-details {
+            display: flex;
+            justify-content: center;
+            gap: 24px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .result-detail {
+            text-align: center;
+        }
+
+        .result-detail-number {
+            font-size: 1.5rem;
+            font-weight: 600;
+            display: block;
+        }
+
+        .result-detail-label {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        .empty-state {
+            text-align: center;
+            color: var(--md-sys-color-on-surface-variant);
+            padding: 60px 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .empty-state .material-icons {
+            font-size: 72px;
+            opacity: 0.4;
+        }
+
+        @media (max-width: 1024px) {
+            .app-layout {
+                grid-template-columns: 1fr;
+            }
+            
+            .sidebar {
+                border-right: none;
+                border-bottom: 1px solid var(--md-sys-color-outline-variant);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="app-layout">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <div class="header">
+                <h1>
+                    <span class="material-icons">link</span>
+                    Chain
+                </h1>
+                <p style="font-size: 0.9rem; opacity: 0.9; margin-top: 8px;">대화문 블록 순서 배열</p>
+            </div>
+
+            <div class="stats-section">
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <span class="stat-number" id="totalRounds">0</span>
+                        <span class="stat-label">총 라운드</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number" id="perfectRounds">0</span>
+                        <span class="stat-label">완벽한 배열</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number" id="totalScore">0</span>
+                        <span class="stat-label">총 점수</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number" id="accuracy">0%</span>
+                        <span class="stat-label">정확도</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="input-section">
+                <div class="input-group">
+                    <label for="dialogueInput">대화문 입력 (한 줄 = 한 블록):</label>
+                    <textarea id="dialogueInput" placeholder="영어 대화문을 한 줄씩 입력하세요.&#10;&#10;예시:&#10;Hello, how are you today?&#10;I'm doing well, thank you.&#10;That's great to hear!&#10;How about you?&#10;I'm having a wonderful day."></textarea>
+                </div>
+                <div class="button-group">
+                    <button class="md-button filled" onclick="createBlocks()">
+                        <span class="material-icons">auto_awesome</span>
+                        블록 생성
+                    </button>
+                    <button class="md-button outlined" onclick="saveDialogue()">
+                        <span class="material-icons">save</span>
+                        저장
+                    </button>
+                </div>
+                <div class="button-group">
+                    <button class="md-button outlined" onclick="clearInput()">
+                        <span class="material-icons">clear</span>
+                        초기화
+                    </button>
+                    <button class="md-button outlined" onclick="loadSample()">
+                        <span class="material-icons">description</span>
+                        샘플
+                    </button>
+                </div>
+            </div>
+
+            <div class="saved-dialogues" id="savedDialogues">
+                <div class="saved-title">
+                    <span class="material-icons">folder</span>
+                    저장된 대화문
+                </div>
+                <div id="savedList">
+                    저장된 대화문이 없습니다.
+                </div>
+            </div>
+
+            <div class="button-group">
+                <button class="md-button outlined" onclick="resetStats()">
+                    <span class="material-icons">refresh</span>
+                    통계 초기화
+                </button>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <div class="chain-area" id="chainArea">
+                <div class="empty-state">
+                    <span class="material-icons">view_module</span>
+                    <h3>대화문을 입력하고 블록을 생성하세요</h3>
+                    <p>각 줄이 하나의 블록이 되어 무작위로 섞입니다</p>
+                </div>
+            </div>
+
+            <div class="result-section" id="resultSection">
+                <div class="result-score" id="resultScore">0/0</div>
+                <div class="result-message" id="resultMessage">결과를 확인해보세요!</div>
+                <div class="result-details">
+                    <div class="result-detail">
+                        <span class="result-detail-number" id="correctBlocks">0</span>
+                        <span class="result-detail-label">정확한 블록</span>
+                    </div>
+                    <div class="result-detail">
+                        <span class="result-detail-number" id="earnedPoints">+0</span>
+                        <span class="result-detail-label">획득 점수</span>
+                    </div>
+                </div>
+                <div class="button-group" style="justify-content: center;">
+                    <button class="md-button success" onclick="nextRound()">
+                        <span class="material-icons">replay</span>
+                        다시 섞기
+                    </button>
+                    <button class="md-button outlined" onclick="showAnswer()">
+                        <span class="material-icons">visibility</span>
+                        정답 보기
+                    </button>
+                    <button class="md-button outlined" onclick="newDialogue()">
+                        <span class="material-icons">add</span>
+                        새 대화문
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const ChainApp = (() => {
+            let originalBlocks = [];
+            let currentBlocks = [];
+            let stats = {
+                totalRounds: 0,
+                perfectRounds: 0,
+                totalScore: 0,
+                correctAnswers: 0
+            };
+
+            const sampleDialogue = `Hello, how are you today?
+I'm doing well, thank you for asking.
+That's great to hear!
+How about you? How's your day going?
+It's been a wonderful day so far.
+I'm glad to hear that.`;
+
+            function loadData() {
+                // 통계 데이터 로드
+                const savedStats = localStorage.getItem('chainStats');
+                if (savedStats) {
+                    stats = JSON.parse(savedStats);
+                    updateStats();
+                }
+                // 저장된 대화문 목록 표시
+                displaySavedDialogues();
+            }
+
+            function saveData() {
+                localStorage.setItem('chainStats', JSON.stringify(stats));
+            }
+
+            function updateStats() {
+                document.getElementById('totalRounds').textContent = stats.totalRounds;
+                document.getElementById('perfectRounds').textContent = stats.perfectRounds;
+                document.getElementById('totalScore').textContent = stats.totalScore;
+                const accuracy = stats.totalRounds > 0 ? 
+                    Math.round((stats.correctAnswers / (stats.totalRounds * (originalBlocks.length || 1))) * 100) : 0;
+                document.getElementById('accuracy').textContent = accuracy + '%';
+            }
+
+            function createBlocks() {
+                const input = document.getElementById('dialogueInput').value.trim();
+                if (!input) {
+                    alert('대화문을 입력해주세요.');
+                    return;
+                }
+                // 줄바꿈으로 블록 분리
+                const lines = input.split('\n').filter(line => line.trim() !== '');
+                if (lines.length < 2) {
+                    alert('최소 2줄 이상의 대화문을 입력해주세요.');
+                    return;
+                }
+                originalBlocks = lines;
+                currentBlocks = [...lines];
+                shuffleArray(currentBlocks);
+                displayBlocks();
+                hideResult();
+            }
+
+            function shuffleArray(array) {
+                for (let i = array.length - 1; i > 0; i--) {
+                    const j = Math.floor(Math.random() * (i + 1));
+                    [array[i], array[j]] = [array[j], array[i]];
+                }
+            }
+
+            function displayBlocks() {
+                const chainArea = document.getElementById('chainArea');
+                const html = `
+                    <div class="chain-title">
+                        <span class="material-icons">reorder</span>
+                        블록을 드래그해서 올바른 순서로 배열하세요
+                        <span class="block-count">${currentBlocks.length}개 블록</span>
+                    </div>
+                    <div class="dialogue-blocks" id="dialogueBlocks">
+                        ${currentBlocks.map((block, index) => `
+                            <div class="dialogue-block" draggable="true" data-index="${index}">
+                                <div class="block-number">${index + 1}</div>
+                                <div class="block-text">${block}</div>
+                                <span class="material-icons drag-handle">drag_indicator</span>
+                            </div>
+                        `).join('')}
+                    </div>
+                    <div class="control-buttons">
+                        <button class="md-button success" onclick="checkOrder()">
+                            <span class="material-icons">check_circle</span>
+                            순서 확인
+                        </button>
+                        <button class="md-button outlined" onclick="shuffleBlocks()">
+                            <span class="material-icons">shuffle</span>
+                            다시 섞기
+                        </button>
+                        <button class="md-button outlined" onclick="resetBlocks()">
+                            <span class="material-icons">refresh</span>
+                            초기화
+                        </button>
+                    </div>
+                `;
+                chainArea.innerHTML = html;
+                setupDragAndDrop();
+            }
+
+            function setupDragAndDrop() {
+                const blocks = document.querySelectorAll('.dialogue-block');
+                const container = document.querySelector('.dialogue-blocks');
+                let draggedItem = null;
+
+                blocks.forEach(block => {
+                    block.addEventListener('dragstart', function(e) {
+                        draggedItem = this;
+                        this.classList.add('dragging');
+                        setTimeout(() => this.style.opacity = '0.5', 0);
+                        e.dataTransfer.effectAllowed = 'move';
+                    });
+
+                    block.addEventListener('dragend', function() {
+                        this.classList.remove('dragging');
+                        this.style.opacity = '1';
+                        draggedItem = null;
+                    });
+                });
+
+                container.addEventListener('dragover', function(e) {
+                    e.preventDefault();
+                    const afterElement = getDragAfterElement(container, e.clientY);
+                    if (draggedItem) {
+                        if (afterElement == null) {
+                            container.appendChild(draggedItem);
+                        } else {
+                            container.insertBefore(draggedItem, afterElement);
+                        }
+                    }
+                });
+
+                function getDragAfterElement(container, y) {
+                    const draggableElements = [...container.querySelectorAll('.dialogue-block:not(.dragging)')];
+                    return draggableElements.reduce((closest, child) => {
+                        const box = child.getBoundingClientRect();
+                        const offset = y - box.top - box.height / 2;
+                        if (offset < 0 && offset > closest.offset) {
+                            return { offset: offset, element: child };
+                        } else {
+                            return closest;
+                        }
+                    }, { offset: Number.NEGATIVE_INFINITY }).element;
+                }
+            }
+
+            function updateBlockOrder() {
+                const blocks = document.querySelectorAll('.dialogue-block');
+                currentBlocks = Array.from(blocks).map(block => block.querySelector('.block-text').textContent);
+            }
+
+            function checkOrder() {
+                updateBlockOrder();
+                const correctCount = currentBlocks.filter((block, index) => 
+                    block === originalBlocks[index]
+                ).length;
+                const isPerfect = correctCount === originalBlocks.length;
+                const points = correctCount * 10;
+                // 통계 업데이트
+                stats.totalRounds++;
+                stats.correctAnswers += correctCount;
+                stats.totalScore += points;
+                if (isPerfect) stats.perfectRounds++;
+                saveData();
+                updateStats();
+                // 블록 색칠하기
+                highlightBlocks();
+                // 결과 표시
+                showResult(correctCount, points, isPerfect);
+            }
+
+            function highlightBlocks() {
+                const blocks = document.querySelectorAll('.dialogue-block');
+                blocks.forEach((block, index) => {
+                    block.classList.remove('correct', 'incorrect');
+                    const blockText = block.querySelector('.block-text').textContent;
+                    if (blockText === originalBlocks[index]) {
+                        block.classList.add('correct');
+                    } else {
+                        block.classList.add('incorrect');
+                    }
+                });
+            }
+
+            function showResult(correctCount, points, isPerfect) {
+                const resultSection = document.getElementById('resultSection');
+                const resultScore = document.getElementById('resultScore');
+                const resultMessage = document.getElementById('resultMessage');
+                const correctBlocks = document.getElementById('correctBlocks');
+                const earnedPoints = document.getElementById('earnedPoints');
+                resultScore.textContent = `${correctCount}/${originalBlocks.length}`;
+                correctBlocks.textContent = correctCount;
+                earnedPoints.textContent = `+${points}`;
+                if (isPerfect) {
+                    resultMessage.textContent = '🎉 완벽합니다! 모든 블록이 올바른 위치에 있습니다!';
+                    resultSection.style.backgroundColor = 'var(--md-sys-color-success)';
+                    resultSection.style.color = 'white';
+                } else if (correctCount >= originalBlocks.length * 0.7) {
+                    resultMessage.textContent = '👍 잘했어요! 대부분의 블록이 올바른 위치에 있습니다.';
+                    resultSection.style.backgroundColor = 'var(--md-sys-color-warning)';
+                    resultSection.style.color = 'white';
+                } else {
+                    resultMessage.textContent = '💪 다시 도전해보세요! 더 많은 블록을 올바른 위치에 놓아보세요.';
+                    resultSection.style.backgroundColor = 'var(--md-sys-color-error)';
+                    resultSection.style.color = 'white';
+                }
+                resultSection.classList.add('show');
+            }
+
+            function hideResult() {
+                document.getElementById('resultSection').classList.remove('show');
+            }
+
+            function showAnswer() {
+                currentBlocks = [...originalBlocks];
+                displayBlocks();
+                hideResult();
+            }
+
+            function nextRound() {
+                shuffleArray(currentBlocks);
+                displayBlocks();
+                hideResult();
+            }
+
+            function shuffleBlocks() {
+                shuffleArray(currentBlocks);
+                displayBlocks();
+            }
+
+            function resetBlocks() {
+                originalBlocks = [];
+                currentBlocks = [];
+                document.getElementById('chainArea').innerHTML = `
+                    <div class="empty-state">
+                        <span class="material-icons">view_module</span>
+                        <h3>대화문을 입력하고 블록을 생성하세요</h3>
+                        <p>각 줄이 하나의 블록이 되어 무작위로 섞입니다</p>
+                    </div>
+                `;
+                hideResult();
+            }
+
+            function newDialogue() {
+                document.getElementById('dialogueInput').value = '';
+                document.getElementById('dialogueInput').focus();
+                resetBlocks();
+            }
+
+            function clearInput() {
+                document.getElementById('dialogueInput').value = '';
+            }
+
+            function loadSample() {
+                document.getElementById('dialogueInput').value = sampleDialogue;
+            }
+
+            function saveDialogue() {
+                const input = document.getElementById('dialogueInput').value.trim();
+                if (!input) {
+                    alert('저장할 대화문을 입력해주세요.');
+                    return;
+                }
+                const title = prompt('대화문 제목을 입력하세요:', '새 대화문');
+                if (!title) return;
+                const saved = JSON.parse(localStorage.getItem('savedDialogues') || '[]');
+                const newDialogue = {
+                    id: Date.now(),
+                    title: title,
+                    content: input,
+                    created: new Date().toLocaleDateString()
+                };
+                saved.push(newDialogue);
+                localStorage.setItem('savedDialogues', JSON.stringify(saved));
+                displaySavedDialogues();
+                alert('대화문이 저장되었습니다.');
+            }
+
+            function displaySavedDialogues() {
+                const saved = JSON.parse(localStorage.getItem('savedDialogues') || '[]');
+                const savedList = document.getElementById('savedList');
+                if (saved.length === 0) {
+                    savedList.innerHTML = '저장된 대화문이 없습니다.';
+                    return;
+                }
+                const html = saved.map(dialogue => `
+                    <div class="saved-item">
+                        <div class="saved-item-text" onclick="loadSavedDialogue(${dialogue.id})">
+                            ${dialogue.title}
+                        </div>
+                        <div class="saved-item-actions">
+                            <button class="action-btn" onclick="deleteSavedDialogue(${dialogue.id})" title="삭제">
+                                <span class="material-icons" style="font-size: 16px;">delete</span>
+                            </button>
+                        </div>
+                    </div>
+                `).join('');
+                savedList.innerHTML = html;
+            }
+
+            function loadSavedDialogue(id) {
+                const saved = JSON.parse(localStorage.getItem('savedDialogues') || '[]');
+                const dialogue = saved.find(d => d.id === id);
+                if (dialogue) {
+                    document.getElementById('dialogueInput').value = dialogue.content;
+                }
+            }
+
+            function deleteSavedDialogue(id) {
+                if (confirm('이 대화문을 삭제하시겠습니까?')) {
+                    const saved = JSON.parse(localStorage.getItem('savedDialogues') || '[]');
+                    const filtered = saved.filter(d => d.id !== id);
+                    localStorage.setItem('savedDialogues', JSON.stringify(filtered));
+                    displaySavedDialogues();
+                }
+            }
+
+            function resetStats() {
+                if (confirm('모든 통계를 초기화하시겠습니까?')) {
+                    stats = {
+                        totalRounds: 0,
+                        perfectRounds: 0,
+                        totalScore: 0,
+                        correctAnswers: 0
+                    };
+                    saveData();
+                    updateStats();
+                }
+            }
+
+            function init() {
+                loadData();
+            }
+
+            return {
+                init,
+                createBlocks,
+                clearInput,
+                loadSample,
+                saveDialogue,
+                checkOrder,
+                showAnswer,
+                nextRound,
+                shuffleBlocks,
+                resetBlocks,
+                newDialogue,
+                resetStats,
+                loadSavedDialogue,
+                deleteSavedDialogue
+            };
+        })();
+
+        // 전역 함수들
+        function createBlocks() { ChainApp.createBlocks(); }
+        function clearInput() { ChainApp.clearInput(); }
+        function loadSample() { ChainApp.loadSample(); }
+        function saveDialogue() { ChainApp.saveDialogue(); }
+        function checkOrder() { ChainApp.checkOrder(); }
+        function showAnswer() { ChainApp.showAnswer(); }
+        function nextRound() { ChainApp.nextRound(); }
+        function shuffleBlocks() { ChainApp.shuffleBlocks(); }
+        function resetBlocks() { ChainApp.resetBlocks(); }
+        function newDialogue() { ChainApp.newDialogue(); }
+        function resetStats() { ChainApp.resetStats(); }
+        function loadSavedDialogue(id) { ChainApp.loadSavedDialogue(id); }
+        function deleteSavedDialogue(id) { ChainApp.deleteSavedDialogue(id); }
+
+        document.addEventListener('DOMContentLoaded', ChainApp.init);
+    </script>
+</body>
+</html>
