@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PencilCases - 관리자 페이지</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Symbols+Outlined" rel="stylesheet">
+    <style>
+        :root {
+            --md-sys-color-primary: #6750A4;
+            --md-sys-color-on-primary: #FFFFFF;
+            --md-sys-color-surface: #FEF7FF;
+            --md-sys-color-on-surface: #1D1B20;
+            --md-sys-color-surface-variant: #E7E0EC;
+            --md-sys-color-outline-variant: #CAC4D0;
+            --md-sys-shape-corner-large: 16px;
+        }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+            background-color: var(--md-sys-color-surface);
+            color: var(--md-sys-color-on-surface);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 24px;
+        }
+        h1 {
+            font-size: 2rem;
+            margin-bottom: 24px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .admin-login {
+            max-width: 400px;
+            margin: 40px auto;
+            background-color: var(--md-sys-color-surface);
+            border: 1px solid var(--md-sys-color-outline-variant);
+            border-radius: var(--md-sys-shape-corner-large);
+            padding: 24px;
+        }
+        .admin-login input, .admin-login button {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 16px;
+            border: 1px solid var(--md-sys-color-outline-variant);
+            border-radius: var(--md-sys-shape-corner-medium);
+            font-family: 'Noto Sans KR', sans-serif;
+            font-size: 16px;
+        }
+        .admin-login button {
+            background-color: var(--md-sys-color-primary);
+            color: var(--md-sys-color-on-primary);
+            border: none;
+            cursor: pointer;
+        }
+        .admin-content {
+            display: none;
+        }
+        .user-list {
+            margin-top: 24px;
+        }
+        .user-item {
+            background-color: var(--md-sys-color-surface);
+            border: 1px solid var(--md-sys-color-outline-variant);
+            border-radius: var(--md-sys-shape-corner-large);
+            padding: 16px;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .user-info span {
+            margin-right: 12px;
+        }
+        .user-actions select, .user-actions button {
+            padding: 8px 12px;
+            border-radius: var(--md-sys-shape-corner-medium);
+            border: 1px solid var(--md-sys-color-outline-variant);
+            font-family: 'Noto Sans KR', sans-serif;
+        }
+        .user-actions button {
+            background-color: var(--md-sys-color-error-container);
+            color: var(--md-sys-color-error);
+            border: none;
+            margin-left: 8px;
+        }
+        .pending-users, .approved-users {
+            margin-bottom: 24px;
+        }
+        .grade-badge {
+            background-color: var(--md-sys-color-tertiary-container);
+            color: var(--md-sys-color-on-tertiary-container);
+            padding: 4px 12px;
+            border-radius: var(--md-sys-shape-corner-small);
+            font-size: 0.85rem;
+            font-weight: 500;
+            display: inline-block;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="admin-login" id="adminLogin">
+            <h1>
+                <span class="material-symbols-outlined">lock</span>
+                관리자 로그인
+            </h1>
+            <input type="text" id="adminUsername" placeholder="아이디" required>
+            <input type="password" id="adminPassword" placeholder="비밀번호" required>
+            <button id="loginButton">로그인</button>
+        </div>
+        <div class="admin-content" id="adminContent">
+            <h1>
+                <span class="material-symbols-outlined">admin_panel_settings</span>
+                PencilCases 관리자 페이지
+            </h1>
+            <div class="pending-users">
+                <h2>
+                    <span class="material-symbols-outlined">pending</span>
+                    회원가입 요청
+                </h2>
+                <div class="user-list" id="pendingUserList"></div>
+            </div>
+            <div class="approved-users">
+                <h2>
+                    <span class="material-symbols-outlined">verified</span>
+                    승인된 회원
+                </h2>
+                <div class="user-list" id="approvedUserList"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 관리자 로그인
+        document.getElementById('loginButton').addEventListener('click', () => {
+            const username = document.getElementById('adminUsername').value;
+            const password = document.getElementById('adminPassword').value;
+            if (username === "admin" && password === "pencilcases2025") {
+                localStorage.setItem('pencilcases_admin', 'true');
+                document.getElementById('adminLogin').style.display = 'none';
+                document.getElementById('adminContent').style.display = 'block';
+                loadUserLists();
+            } else {
+                alert('아이디 또는 비밀번호가 잘못되었습니다.');
+            }
+        });
+
+        // 페이지 로드 시 관리자 로그인 상태 확인
+        if (localStorage.getItem('pencilcases_admin') === 'true') {
+            document.getElementById('adminLogin').style.display = 'none';
+            document.getElementById('adminContent').style.display = 'block';
+            loadUserLists();
+        }
+
+        // 사용자 목록 불러오기
+        function loadUserLists() {
+            const pendingUsers = JSON.parse(localStorage.getItem('pencilcases_pending_users') || '[]');
+            const approvedUsers = JSON.parse(localStorage.getItem('pencilcases_approved_users') || '[]');
+
+            // 회원가입 요청 목록
+            const pendingList = document.getElementById('pendingUserList');
+            pendingList.innerHTML = '';
+            pendingUsers.forEach(user => {
+                const userItem = document.createElement('div');
+                userItem.className = 'user-item';
+                userItem.innerHTML = `
+                    <div class="user-info">
+                        <span>${user.username}</span>
+                        <span>${new Date(user.createdAt).toLocaleString()}</span>
+                    </div>
+                    <div class="user-actions">
+                        <select class="grade-selector" data-id="${user.id}">
+                            <option value="junior">Junior</option>
+                            <option value="sophomore">Sophomore</option>
+                            <option value="senior">Senior</option>
+                        </select>
+                        <button onclick="approveUser('${user.id}')">승인</button>
+                        <button onclick="rejectUser('${user.id}')">거절</button>
+                    </div>
+                `;
+                pendingList.appendChild(userItem);
+            });
+
+            // 승인된 회원 목록
+            const approvedList = document.getElementById('approvedUserList');
+            approvedList.innerHTML = '';
+            approvedUsers.forEach(user => {
+                const userItem = document.createElement('div');
+                userItem.className = 'user-item';
+                userItem.innerHTML = `
+                    <div class="user-info">
+                        <span>${user.username}</span>
+                        <span>${new Date(user.createdAt).toLocaleString()}</span>
+                        <span class="grade-badge">${user.grade || '승인 대기'}</span>
+                    </div>
+                    <div class="user-actions">
+                        <select class="grade-selector" data-id="${user.id}">
+                            <option value="junior" ${user.grade === 'junior' ? 'selected' : ''}>Junior</option>
+                            <option value="sophomore" ${user.grade === 'sophomore' ? 'selected' : ''}>Sophomore</option>
+                            <option value="senior" ${user.grade === 'senior' ? 'selected' : ''}>Senior</option>
+                        </select>
+                        <button onclick="updateGrade('${user.id}')">등급 변경</button>
+                        <button onclick="deleteUser('${user.id}')">삭제</button>
+                    </div>
+                `;
+                approvedList.appendChild(userItem);
+            });
+        }
+
+        // 승인
+        function approveUser(id) {
+            const pendingUsers = JSON.parse(localStorage.getItem('pencilcases_pending_users') || '[]');
+            const approvedUsers = JSON.parse(localStorage.getItem('pencilcases_approved_users') || '[]');
+            const user = pendingUsers.find(u => u.id === id);
+            if (!user) return;
+            const selector = document.querySelector(`select[data-id="${id}"]`);
+            user.grade = selector.value;
+            approvedUsers.push(user);
+            localStorage.setItem('pencilcases_approved_users', JSON.stringify(approvedUsers));
+            localStorage.setItem('pencilcases_pending_users', JSON.stringify(pendingUsers.filter(u => u.id !== id)));
+            loadUserLists();
+        }
+
+        // 거절
+        function rejectUser(id) {
+            const pendingUsers = JSON.parse(localStorage.getItem('pencilcases_pending_users') || '[]');
+            localStorage.setItem('pencilcases_pending_users', JSON.stringify(pendingUsers.filter(u => u.id !== id)));
+            loadUserLists();
+        }
+
+        // 등급 변경
+        function updateGrade(id) {
+            const approvedUsers = JSON.parse(localStorage.getItem('pencilcases_approved_users') || '[]');
+            const user = approvedUsers.find(u => u.id === id);
+            if (!user) return;
+            const selector = document.querySelector(`select[data-id="${id}"]`);
+            user.grade = selector.value;
+            localStorage.setItem('pencilcases_approved_users', JSON.stringify(approvedUsers));
+            loadUserLists();
+        }
+
+        // 삭제
+        function deleteUser(id) {
+            const approvedUsers = JSON.parse(localStorage.getItem('pencilcases_approved_users') || '[]');
+            localStorage.setItem('pencilcases_approved_users', JSON.stringify(approvedUsers.filter(u => u.id !== id)));
+            loadUserLists();
+        }
+
+        // 전역 함수로 등록
+        window.approveUser = approveUser;
+        window.rejectUser = rejectUser;
+        window.updateGrade = updateGrade;
+        window.deleteUser = deleteUser;
+    </script>
+</body>
+</html>
